@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flask Screenshot</title>
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+</head>
+
+<body>
+
+  <section class="hero is-fullheight is-primary is-bold">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="columns is-mobile is-centered">
+          <div class="column is-half is-narrow">
+            <a class="button is-medium" id="get_ss">GET SCREENSHOT</a>
+            <div id="show_ss"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script type=text/javascript>
+    $('#get_ss').click(function() {
+      $('#get_ss').addClass('is-loading');
+      $.ajax({
+        url: '/get_screenshot',
+        type: 'POST',
+        success: function(response) {
+          $('#show_ss').html(response);
+          $('#get_ss').hide();
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
